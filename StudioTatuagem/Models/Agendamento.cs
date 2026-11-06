@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StudioTatuagem.Models
 {
-    public class Agendamento
+    public class Agendamento : IEntidade 
     {
         public int Id { get; set; }
         public Cliente Cliente { get; }

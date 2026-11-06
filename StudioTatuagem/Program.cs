@@ -1,11 +1,39 @@
 ﻿using StudioTatuagem.Models;
+using StudioTatuagem.Repositorios;
 
-Console.WriteLine("Hello, World!");
+RepositorioEmMemoria<Cliente> RepCliente = new RepositorioEmMemoria<Cliente>();
 
-Cliente cliente = new Cliente("Marco", "123456789", "Cliente VIP");
-Agendamento agendamento = new Agendamento(1, cliente, new DateTime(2026, 11, 5, 9, 0, 0), 60, "Tatuagem de dragão", 200.00m);
-Agendamento agendamento2 = new Agendamento(2, cliente, new DateTime(2026, 11, 5, 9, 0, 0), 30, "Tatuagem de fênix", 150.00m);
+RepCliente.Adicionar(new Cliente("Marco", "123", "DSADS"));
+RepCliente.Adicionar(new Cliente("Maria", "456", "DSADS"));
+RepCliente.Adicionar(new Cliente("José", "789", "DSADS"));
 
-Console.WriteLine(agendamento.conflitaCom(agendamento2));
-Console.WriteLine(agendamento.resumo());
-Console.WriteLine(agendamento2.resumo());
+foreach (Cliente c in RepCliente.ListarTodos()) 
+{
+    Console.WriteLine(c.Resumo());
+}
+Console.WriteLine("\n=== Teste 2: buscar por Id ===");
+var achado = RepCliente.BuscarPorId(2);
+Console.WriteLine(achado != null ? achado.Resumo() : "Id 2 não encontrado");
+
+var inexistente = RepCliente.BuscarPorId(99);
+Console.WriteLine(inexistente != null ? inexistente.Resumo() : "Id 99 não encontrado");
+
+
+
+Console.WriteLine("\n=== Teste 3: crescimento do vetor ===");
+var repoGrande = new RepositorioEmMemoria<Cliente>();
+
+for (int i = 1; i <= 12; i++)
+{
+    repoGrande.Adicionar(new Cliente($"Cliente {i}", "000", "-"));
+}
+
+var todos = repoGrande.ListarTodos();
+Console.WriteLine($"Total guardado: {todos.Length}");
+
+for(int i = 0; i < todos.Length; i++)
+{
+    Console.WriteLine(todos[i].Resumo());
+}
+
+

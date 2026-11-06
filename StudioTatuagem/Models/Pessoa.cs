@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StudioTatuagem.Models
 {
-    public abstract class Pessoa
+    public abstract class Pessoa : IEntidade
     {
         public int Id { get; set; }
         public string Nome { get; private set;}
