@@ -14,9 +14,9 @@ namespace StudioTatuagem.Models
         public decimal Valor { get; }
         public StatusAgendamento Status { get; set;} = StatusAgendamento.Agendado;
 
-        public Agendamento(int id, Cliente cliente, DateTime inicio, int duracao, string descricao, decimal valor)
+        public Agendamento(Cliente cliente, DateTime inicio, int duracao, string descricao, decimal valor)
         {
-            Id = id;
+            //Id = id;
             Cliente = cliente;
             Inicio = inicio;
             Duracao = duracao;
@@ -29,12 +29,12 @@ namespace StudioTatuagem.Models
             return Inicio.AddMinutes(Duracao);
         }
 
-        public bool conflitaCom(Agendamento outro)
+        public bool ConflitaCom(Agendamento outro)
         {
             return Inicio < outro.Fim() && outro.Inicio < Fim();
         }
 
-        public string resumo()
+        public string Resumo()
         {
             return $"[{Id}] | Cliente: {Cliente.Nome} | Início: {Inicio:dd/MM/yyyy HH:mm} | Fim: {Fim():dd/MM/yyyy HH:mm} | Duração: {Duracao} minutos | Descrição: {Descricao} | Valor: R${Valor} | Status: {Status}";
         }

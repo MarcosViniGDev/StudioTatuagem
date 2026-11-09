@@ -17,8 +17,5 @@ namespace StudioTatuagem.Models
             Nome = nome;
             Telefone = telefone;
         }
-
-
-        
     }
 }
