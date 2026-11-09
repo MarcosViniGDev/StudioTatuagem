@@ -40,5 +40,31 @@ namespace StudioTatuagem.Services
             Array.Sort(copia, (a, b) => a.Inicio.CompareTo(b.Inicio));
             return copia;
         }
+
+        public bool Concluir(int id)
+        {
+            var agendamento = _repositorioAgendamento.BuscarPorId(id);
+            if (agendamento == null || agendamento.Status != StatusAgendamento.Agendado)
+            {
+                return false;
+            }
+            agendamento.Status = StatusAgendamento.Concluido;
+            return true;
+        }
+
+        public decimal FaturamentoMes(int ano, int mes)
+        {
+            decimal total = 0m;
+            foreach (var agendamento in _repositorioAgendamento.ListarTodos())
+            {
+                if (agendamento.Status == StatusAgendamento.Concluido && agendamento.Inicio.Year == ano && agendamento.Inicio.Month == mes)
+                {
+                    total += agendamento.Valor;
+                }
+            }
+            return total;
+        }
+
+
     }
 }

@@ -24,9 +24,11 @@ namespace StudioTatuagem.UI
                 Console.WriteLine("3. Agendar Sessão");
                 Console.WriteLine("4. Listar Agendamentos");
                 Console.WriteLine("5. Cancelar Agendamento");
+                Console.WriteLine("6. Concluir Agendamento");
+                Console.WriteLine("7. Faturamento do Mês");
                 Console.WriteLine("0. Sair");
                 Console.Write("Escolha uma opção: ");
-                string opcao = Console.ReadLine();
+                string opcao = Console.ReadLine() ?? "";
                 switch (opcao)
                 {
                     case "1":
@@ -36,8 +38,7 @@ namespace StudioTatuagem.UI
                         ListarClientes();
                         break;
                     case "3":
-                        AgendarSessao()
-                            ;
+                        AgendarSessao();
                         break;
                     case "4":
                         ListarAgendamentos();
@@ -45,6 +46,12 @@ namespace StudioTatuagem.UI
                     case "5":
                         CancelarAgendamento();
                         break;
+                    case "6":
+                        ConcluirAgendamento();
+                        break;
+                    case "7":
+                        FaturamentoMensal();
+                        break;  
                     case "0":
                         return;
                     default:
@@ -169,6 +176,44 @@ namespace StudioTatuagem.UI
                 Console.WriteLine("Agendamento não encontrado ou já cancelado.");
                 return;
             }
+        }
+
+        private void ConcluirAgendamento()
+        {
+            Console.Write("Digite o ID do agendamento a ser concluído: ");
+            if (!int.TryParse(Console.ReadLine(), out int idAgendamento))
+            {
+                Console.WriteLine("ID inválido.");
+                return;
+            }
+            if (_agenda.Concluir(idAgendamento))
+            {
+                Console.WriteLine("Agendamento concluído com sucesso.");
+            }
+            else
+            {
+                Console.WriteLine("Agendamento não encontrado ou já concluído/cancelado.");
+            }
+        }
+
+        private void FaturamentoMensal()
+        {
+            Console.Write("Digite o ano: ");
+            if (!int.TryParse(Console.ReadLine(), out int ano))
+            {
+                Console.WriteLine("Ano inválido.");
+                return;
+            }
+
+            Console.Write("Digite o mês: ");
+            if (!int.TryParse(Console.ReadLine(), out int mes) || mes < 1 || mes > 12)
+            {
+                Console.WriteLine("Mês inválido.");
+                return;
+            }
+
+            decimal faturamento = _agenda.FaturamentoMes(ano, mes);
+            Console.WriteLine($"Faturamento do mês {mes}/{ano}: R$ {faturamento.ToString("C", _pt)}");
         }
     }
 }
