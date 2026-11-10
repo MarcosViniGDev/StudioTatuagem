@@ -10,8 +10,8 @@ namespace StudioTatuagem.UI
 {
     public class Menu
     {
-        private readonly RepositorioEmMemoria<Cliente> _repositorioCliente = new RepositorioEmMemoria<Cliente>();
-        private readonly Agenda _agenda = new Agenda();
+        private readonly IRepositorio<Cliente> _repositorioCliente = new RepositorioJson<Cliente>("clientes.json");
+        private readonly Agenda _agenda = new Agenda(new RepositorioJson<Agendamento>("agendamentos.json"));
         private readonly CultureInfo _pt = new CultureInfo("pt-BR");
 
         public void Executar()

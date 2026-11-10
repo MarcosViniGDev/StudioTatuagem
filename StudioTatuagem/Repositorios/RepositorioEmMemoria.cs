@@ -1,11 +1,12 @@
-﻿using System;
+﻿using StudioTatuagem.Models;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 
 namespace StudioTatuagem.Repositorios
 {
-    public class RepositorioEmMemoria<T> where T : Models.IEntidade
+    public class RepositorioEmMemoria<T> : IRepositorio<T> where T : class, IEntidade
     {
         private T[] _itens = new T[10];
         private int _quantidadeItens = 0;
@@ -43,5 +44,7 @@ namespace StudioTatuagem.Repositorios
 
             return copy;
         }    
+
+        public void Salvar(){ }
     }
 }

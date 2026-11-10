@@ -8,8 +8,13 @@ namespace StudioTatuagem.Services
 {
     public class Agenda
     {
-        private readonly RepositorioEmMemoria<Agendamento> _repositorioAgendamento = new RepositorioEmMemoria<Agendamento>();
+        private readonly IRepositorio<Agendamento> _repositorioAgendamento;
         
+        public Agenda(IRepositorio<Agendamento> repositorioAgendamento)
+        {
+            _repositorioAgendamento = repositorioAgendamento;
+        }
+
         public Agendamento? Agendar(Cliente cliente, DateTime inicio, int duracao, string descricao, decimal valor)
         {
             Agendamento agend = new Agendamento(cliente, inicio, duracao, descricao, valor);
@@ -31,6 +36,7 @@ namespace StudioTatuagem.Services
                 return false;
             }
             agendamento.Status = StatusAgendamento.Cancelado;
+            _repositorioAgendamento.Salvar();
             return true;
         }
 
@@ -49,6 +55,7 @@ namespace StudioTatuagem.Services
                 return false;
             }
             agendamento.Status = StatusAgendamento.Concluido;
+            _repositorioAgendamento.Salvar();
             return true;
         }
 
