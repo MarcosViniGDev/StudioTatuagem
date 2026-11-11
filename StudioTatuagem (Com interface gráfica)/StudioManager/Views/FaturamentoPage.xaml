@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:StudioManager.ViewModels"
+             x:Class="StudioManager.Views.FaturamentoPage"
+             x:DataType="vm:FaturamentoViewModel"
+             Title="Faturamento">
+
+    <VerticalStackLayout Padding="20" Spacing="10"
+                         MaximumWidthRequest="500" HorizontalOptions="Start">
+
+        <Label Text="Faturamento do mês" FontSize="24" />
+
+        <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="10">
+            <VerticalStackLayout Grid.Column="0">
+                <Label Text="Ano" />
+                <Entry Text="{Binding Ano}" Keyboard="Numeric" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1">
+                <Label Text="Mês (1 a 12)" />
+                <Entry Text="{Binding Mes}" Keyboard="Numeric" />
+            </VerticalStackLayout>
+
+            <Button Grid.Column="2" Text="Calcular"
+                    Command="{Binding CalcularCommand}" VerticalOptions="End" />
+        </Grid>
+
+        <Label Text="{Binding Mensagem}" />
+
+        <Label Text="Total de sessões concluídas no mês" Margin="0,20,0,0" />
+        <Label Text="{Binding Total}" FontSize="32" FontAttributes="Bold" />
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -33,7 +33,6 @@ namespace StudioManager
                 new RepositorioJson<Agendamento>(Path.Combine(FileSystem.AppDataDirectory, "agendamentos.json")));
 
             builder.Services.AddSingleton<Agenda>();
-
             builder.Services.AddSingleton<ClientesViewModel>();
             builder.Services.AddTransient<ClientesPage>();
             builder.Services.AddTransient<CadastroClienteViewModel>();
@@ -41,7 +40,9 @@ namespace StudioManager
             builder.Services.AddSingleton<AgendaViewModel>();
             builder.Services.AddTransient<AgendaPage>();
             builder.Services.AddTransient<AgendarSessaoViewModel>();
-            builder.Services.AddTransient<AgendarSessaoPage>(); 
+            builder.Services.AddTransient<AgendarSessaoPage>();
+            builder.Services.AddSingleton<FaturamentoViewModel>();
+            builder.Services.AddTransient<FaturamentoPage>();
 
             return builder.Build();
         }

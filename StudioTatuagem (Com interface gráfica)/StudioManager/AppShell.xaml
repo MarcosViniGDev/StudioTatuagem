@@ -16,4 +16,9 @@
         ContentTemplate="{DataTemplate views:AgendaPage}"
         Route="AgendaPage" />
 
+    <ShellContent
+        Title="Faturamento"
+        ContentTemplate="{DataTemplate views:FaturamentoPage}"
+        Route="FaturamentoPage" />
+
 </Shell>
