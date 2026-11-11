@@ -30,5 +30,5 @@ public partial class ClientesViewModel : ObservableObject
     private async Task NovoCliente()
     {
         await Shell.Current.GoToAsync("CadastroCliente");
-    }
+    }   
 }

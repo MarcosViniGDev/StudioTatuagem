@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="StudioManager.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:StudioManager.Views"
+    FlyoutBehavior="Locked"
     Title="StudioManager">
 
     <ShellContent
         Title="Clientes"
         ContentTemplate="{DataTemplate views:ClientesPage}"
         Route="ClientesPage" />
+
+    <ShellContent
+        Title="Agenda"
+        ContentTemplate="{DataTemplate views:AgendaPage}"
+        Route="AgendaPage" />
 
 </Shell>

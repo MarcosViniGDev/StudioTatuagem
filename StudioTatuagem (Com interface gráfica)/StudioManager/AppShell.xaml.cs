@@ -8,6 +8,8 @@ namespace StudioManager
         {
             InitializeComponent();
             Routing.RegisterRoute("CadastroCliente", typeof(CadastroClientePage));
+            Routing.RegisterRoute("AgendarSessao", typeof(AgendarSessaoPage));
+
         }
     }
 }

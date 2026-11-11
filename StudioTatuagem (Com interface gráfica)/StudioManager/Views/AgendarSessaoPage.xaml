@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:StudioManager.ViewModels"
+             xmlns:models="clr-namespace:StudioManager.Models"
+             x:Class="StudioManager.Views.AgendarSessaoPage"
+             x:DataType="vm:AgendarSessaoViewModel"
+             Title="Nova sessão">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10"
+                             MaximumWidthRequest="500" HorizontalOptions="Start">
+
+            <Label Text="Nova sessão" FontSize="24" />
+
+            <Label Text="Cliente" />
+            <Picker Title="Selecione o cliente"
+                    ItemsSource="{Binding Clientes}"
+                    ItemDisplayBinding="{Binding Nome, x:DataType=models:Cliente}"
+                    SelectedItem="{Binding ClienteSelecionado}" />
+
+            <Label Text="Data" />
+            <DatePicker Date="{Binding Data}" />
+
+            <Label Text="Hora de início" />
+            <TimePicker Time="{Binding Hora}" />
+
+            <Label Text="Duração (minutos)" />
+            <Entry Text="{Binding Duracao}" Keyboard="Numeric" Placeholder="60" />
+
+            <Label Text="Descrição" />
+            <Entry Text="{Binding Descricao}" Placeholder="Ex.: fineline no antebraço" />
+
+            <Label Text="Valor (R$)" />
+            <Entry Text="{Binding Valor}" Placeholder="300,00" />
+
+            <Button Text="Agendar" Command="{Binding AgendarCommand}" />
+
+            <Label Text="{Binding Mensagem}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -84,13 +84,22 @@
 	  <Compile Update="Views\CadastroClientePage.xaml.cs">
 	    <DependentUpon>CadastroClientePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\AgendarSessaoPage.xaml.cs">
+	    <DependentUpon>AgendarSessaoPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\AgendaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ClientePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\CadastroClientePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AgendarSessaoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

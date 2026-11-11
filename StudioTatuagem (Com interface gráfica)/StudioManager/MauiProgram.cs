@@ -38,6 +38,10 @@ namespace StudioManager
             builder.Services.AddTransient<ClientesPage>();
             builder.Services.AddTransient<CadastroClienteViewModel>();
             builder.Services.AddTransient<CadastroClientePage>();
+            builder.Services.AddSingleton<AgendaViewModel>();
+            builder.Services.AddTransient<AgendaPage>();
+            builder.Services.AddTransient<AgendarSessaoViewModel>();
+            builder.Services.AddTransient<AgendarSessaoPage>(); 
 
             return builder.Build();
         }

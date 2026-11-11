@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:StudioManager.ViewModels"
+             xmlns:models="clr-namespace:StudioManager.Models"
+             x:Class="StudioManager.Views.AgendaPage"
+             x:DataType="vm:AgendaViewModel"
+             Title="Agenda">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="20" RowSpacing="10">
+
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+            <Label Grid.Column="0" Text="Agenda" FontSize="24" VerticalOptions="Center" />
+            <Button Grid.Column="1" Text="Nova sessão" Command="{Binding NovaSessaoCommand}" />
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="1" Spacing="10">
+            <Button Text="Concluir selecionada" Command="{Binding ConcluirCommand}" />
+            <Button Text="Cancelar selecionada" Command="{Binding CancelarCommand}" />
+            <Label Text="{Binding Mensagem}" VerticalOptions="Center" />
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="2" ColumnDefinitions="50,150,*,2*,100,100">
+            <Label Grid.Column="0" Text="Id" FontAttributes="Bold" />
+            <Label Grid.Column="1" Text="Início" FontAttributes="Bold" />
+            <Label Grid.Column="2" Text="Cliente" FontAttributes="Bold" />
+            <Label Grid.Column="3" Text="Descrição" FontAttributes="Bold" />
+            <Label Grid.Column="4" Text="Valor" FontAttributes="Bold" />
+            <Label Grid.Column="5" Text="Status" FontAttributes="Bold" />
+        </Grid>
+
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding Agendamentos}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding AgendamentoSelecionado}">
+            <CollectionView.EmptyView>
+                <Label Text="Nenhum agendamento." />
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Agendamento">
+                    <Grid ColumnDefinitions="50,150,*,2*,100,100" Padding="0,5">
+                        <Label Grid.Column="0" Text="{Binding Id}" />
+                        <Label Grid.Column="1" Text="{Binding Inicio, StringFormat='{0:dd/MM/yyyy HH:mm}'}" />
+                        <Label Grid.Column="2" Text="{Binding Cliente.Nome}" />
+                        <Label Grid.Column="3" Text="{Binding Descricao}" />
+                        <Label Grid.Column="4" Text="{Binding Valor, StringFormat='{0:C}'}" />
+                        <Label Grid.Column="5" Text="{Binding Status}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
