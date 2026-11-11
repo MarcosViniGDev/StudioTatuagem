@@ -66,8 +66,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -77,13 +78,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\ClientesPage.xaml.cs">
-	    <DependentUpon>ClientesPage.xaml</DependentUpon>
+	  <Compile Update="Views\ClientePage.xaml.cs">
+	    <DependentUpon>ClientePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\CadastroClientePage.xaml.cs">
+	    <DependentUpon>CadastroClientePage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\ClientesPage.xaml">
+	  <MauiXaml Update="Views\ClientePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CadastroClientePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

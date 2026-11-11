@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:StudioManager.ViewModels"
+             x:Class="StudioManager.Views.CadastroClientePage"
+             x:DataType="vm:CadastroClienteViewModel"
+             Title="Novo cliente">
+
+    <VerticalStackLayout Padding="20" Spacing="10"
+                         MaximumWidthRequest="500" HorizontalOptions="Start">
+
+        <Label Text="Novo cliente" FontSize="24" />
+
+        <Label Text="Nome" />
+        <Entry Text="{Binding Nome}" Placeholder="Nome completo" />
+
+        <Label Text="Telefone" />
+        <Entry Text="{Binding Telefone}" Placeholder="(31) 99999-9999" />
+
+        <Label Text="Observações" />
+        <Editor Text="{Binding Observacao}" Placeholder="Alergias, preferências..."
+                HeightRequest="100" />
+
+        <Button Text="Salvar" Command="{Binding SalvarCommand}" />
+
+        <Label Text="{Binding Mensagem}" />
+
+    </VerticalStackLayout>
+</ContentPage>

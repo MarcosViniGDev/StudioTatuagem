@@ -9,8 +9,11 @@
 
     <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="10">
 
-        <Label Grid.Row="0" Text="Clientes" FontSize="24" />
-
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+            <Label Grid.Column="0" Text="Clientes" FontSize="24" VerticalOptions="Center" />
+            <Button Grid.Column="1" Text="Novo cliente" Command="{Binding NovoClienteCommand}" />
+        </Grid>
+        
         <Grid Grid.Row="1" ColumnDefinitions="60,*,*,2*">
             <Label Grid.Column="0" Text="Id" FontAttributes="Bold" />
             <Label Grid.Column="1" Text="Nome" FontAttributes="Bold" />

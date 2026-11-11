@@ -10,6 +10,7 @@ namespace StudioManager
 {
     public static class MauiProgram
     {
+
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -35,6 +36,8 @@ namespace StudioManager
 
             builder.Services.AddSingleton<ClientesViewModel>();
             builder.Services.AddTransient<ClientesPage>();
+            builder.Services.AddTransient<CadastroClienteViewModel>();
+            builder.Services.AddTransient<CadastroClientePage>();
 
             return builder.Build();
         }

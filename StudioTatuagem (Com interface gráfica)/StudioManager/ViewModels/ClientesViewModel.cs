@@ -1,10 +1,12 @@
 ﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using StudioManager.Models;
 using StudioManager.Repositorios;
 
 namespace StudioManager.ViewModels;
 
-public class ClientesViewModel
+public partial class ClientesViewModel : ObservableObject
 {
     private readonly IRepositorio<Cliente> _repositorio;
 
@@ -22,5 +24,11 @@ public class ClientesViewModel
         {
             Clientes.Add(cliente);
         }
+    }
+
+    [RelayCommand]
+    private async Task NovoCliente()
+    {
+        await Shell.Current.GoToAsync("CadastroCliente");
     }
 }
