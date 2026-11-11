@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:StudioManager.ViewModels"
+             xmlns:models="clr-namespace:StudioManager.Models"
+             x:Class="StudioManager.Views.ClientesPage"
+             x:DataType="vm:ClientesViewModel"
+             Title="Clientes">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="10">
+
+        <Label Grid.Row="0" Text="Clientes" FontSize="24" />
+
+        <Grid Grid.Row="1" ColumnDefinitions="60,*,*,2*">
+            <Label Grid.Column="0" Text="Id" FontAttributes="Bold" />
+            <Label Grid.Column="1" Text="Nome" FontAttributes="Bold" />
+            <Label Grid.Column="2" Text="Telefone" FontAttributes="Bold" />
+            <Label Grid.Column="3" Text="Observação" FontAttributes="Bold" />
+        </Grid>
+
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Clientes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Cliente">
+                    <Grid ColumnDefinitions="60,*,*,2*" Padding="0,5">
+                        <Label Grid.Column="0" Text="{Binding Id}" />
+                        <Label Grid.Column="1" Text="{Binding Nome}" />
+                        <Label Grid.Column="2" Text="{Binding Telefone}" />
+                        <Label Grid.Column="3" Text="{Binding Observacao}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
