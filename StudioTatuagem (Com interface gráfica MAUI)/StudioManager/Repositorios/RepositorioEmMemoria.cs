@@ -46,5 +46,33 @@ namespace StudioManager.Repositorios
         }    
 
         public void Salvar(){ }
+        
+        public bool Remover(int id)
+        {
+            for (int i = 0; i < _quantidadeItens; i++)
+            {
+                if (id == _itens[i].Id)
+                {
+                    for (int j = i; j < _quantidadeItens - 1; j++)
+                    {
+                        _itens[j] = _itens[j + 1];
+                    }
+                    _itens[--_quantidadeItens] = null!;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void Restaurar(T item)
+        {
+            if (_quantidadeItens >= _itens.Length)
+            {
+                Array.Resize(ref _itens, _itens.Length * 2);
+            }
+
+            _itens[_quantidadeItens++] = item;
+            _proximoId = Math.Max(_proximoId, item.Id + 1);
+        }
     }
 }

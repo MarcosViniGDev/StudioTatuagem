@@ -12,5 +12,8 @@ namespace StudioManager.Repositorios
         public T[] ListarTodos();
 
         public void Salvar();
+
+        public bool Remover(int id);
+
     }
 }

@@ -4,12 +4,12 @@
              xmlns:vm="clr-namespace:StudioManager.ViewModels"
              x:Class="StudioManager.Views.CadastroClientePage"
              x:DataType="vm:CadastroClienteViewModel"
-             Title="Novo cliente">
+             Title="Cliente">
 
     <VerticalStackLayout Padding="20" Spacing="10"
                          MaximumWidthRequest="500" HorizontalOptions="Start">
 
-        <Label Text="Novo cliente" FontSize="24" />
+        <Label Text="{Binding Titulo}" FontSize="24" />
 
         <Label Text="Nome" />
         <Entry Text="{Binding Nome}" Placeholder="Nome completo" />

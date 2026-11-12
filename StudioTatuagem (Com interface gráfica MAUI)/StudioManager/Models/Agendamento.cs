@@ -1,44 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 
 namespace StudioManager.Models
 {
-    public class Agendamento : IEntidade 
+    public class Agendamento : IEntidade
     {
         public int Id { get; set; }
-        public Cliente Cliente { get; }
-        public DateTime Inicio { get; }
-        public int Duracao { get; }
-        public string Descricao { get; }
-        public decimal Valor { get; }
-        public StatusAgendamento Status { get; set;} = StatusAgendamento.Agendado;
 
-        public Agendamento(Cliente cliente, DateTime inicio, int duracao, string descricao, decimal valor)
+        public int ClienteId { get; private set; }
+
+        [JsonIgnore]
+        public Cliente? Cliente { get; set; }
+
+        public DateTime Inicio { get; private set; }
+        public int DuracaoMinutos { get; private set; }
+        public string Descricao { get; private set; }
+        public decimal Valor { get; private set; }
+        public StatusAgendamento Status { get; set; } = StatusAgendamento.Agendado;
+
+        [JsonIgnore]
+        public DateTime Fim => Inicio.AddMinutes(DuracaoMinutos);
+
+        public Agendamento(Cliente cliente, DateTime inicio, int duracaoMinutos, string descricao, decimal valor)
+            : this(cliente.Id, inicio, duracaoMinutos, descricao, valor)
         {
-            //Id = id;
             Cliente = cliente;
+        }
+        [JsonConstructor]
+        public Agendamento(int clienteId, DateTime inicio, int duracaoMinutos, string descricao, decimal valor)
+        {
+            ClienteId = clienteId;
             Inicio = inicio;
-            Duracao = duracao;
+            DuracaoMinutos = duracaoMinutos;
             Descricao = descricao;
             Valor = valor;
         }
 
-        public DateTime Fim()
+        public void Atualizar(Cliente cliente, DateTime inicio, int duracaoMinutos, string descricao, decimal valor)
         {
-            return Inicio.AddMinutes(Duracao);
+            Cliente = cliente;
+            ClienteId = cliente.Id;
+            Inicio = inicio;
+            DuracaoMinutos = duracaoMinutos;
+            Descricao = descricao;
+            Valor = valor;
         }
 
-        public bool ConflitaCom(Agendamento outro)
-        {
-            return Inicio < outro.Fim() && outro.Inicio < Fim();
-        }
+        public bool ConflitaCom(Agendamento outro) =>
+            Inicio < outro.Fim && outro.Inicio < Fim;
 
-        public string Resumo()
-        {
-            return $"[{Id}] | Cliente: {Cliente.Nome} | Início: {Inicio:dd/MM/yyyy HH:mm} | Fim: {Fim():dd/MM/yyyy HH:mm} | Duração: {Duracao} minutos | Descrição: {Descricao} | Valor: R${Valor} | Status: {Status}";
-        }
-
-
+        public string Resumo() =>
+            $"[{Id}] {Inicio:dd/MM/yyyy HH:mm} - {Fim:HH:mm} | {Cliente?.Nome} | {Descricao} | R$ {Valor:F2} | {Status}";
     }
 }

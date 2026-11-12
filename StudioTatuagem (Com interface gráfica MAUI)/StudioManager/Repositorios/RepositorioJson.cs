@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 using StudioManager.Models;
-
 
 namespace StudioManager.Repositorios
 {
@@ -20,17 +16,13 @@ namespace StudioManager.Repositorios
 
         private void Carregar()
         {
-
             if (!File.Exists(_caminho))
             {
                 return;
             }
 
             string json = File.ReadAllText(_caminho);
-            Console.WriteLine("Caracteres lidos: " + json.Length);
-
             T[]? itens = JsonSerializer.Deserialize<T[]>(json);
-            Console.WriteLine("Itens desserializados: " + (itens?.Length ?? -1));
 
             if (itens is null)
             {
@@ -39,14 +31,14 @@ namespace StudioManager.Repositorios
 
             foreach (var item in itens)
             {
-                _repositorio.Adicionar(item);
+                _repositorio.Restaurar(item);
             }
         }
 
         public void Salvar()
         {
             T[] itens = _repositorio.ListarTodos();
-            string json = JsonSerializer.Serialize(itens, new JsonSerializerOptions { WriteIndented = true });  
+            string json = JsonSerializer.Serialize(itens, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_caminho, json);
         }
 
@@ -55,6 +47,18 @@ namespace StudioManager.Repositorios
             T adicionado = _repositorio.Adicionar(item);
             Salvar();
             return adicionado;
+        }
+
+        public bool Remover(int id)
+        {
+            bool removido = _repositorio.Remover(id);
+
+            if (removido)
+            {
+                Salvar();
+            }
+
+            return removido;
         }
 
         public T? BuscarPorId(int id)
@@ -66,7 +70,5 @@ namespace StudioManager.Repositorios
         {
             return _repositorio.ListarTodos();
         }
-
-
     }
 }

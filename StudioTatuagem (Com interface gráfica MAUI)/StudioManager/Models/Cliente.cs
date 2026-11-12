@@ -11,7 +11,12 @@ namespace StudioManager.Models
         {
             Observacao = observacao;
         }
-
+        public void Atualizar(string nome, string telefone, string observacao)
+        {
+            Nome = nome;
+            Telefone = telefone;
+            Observacao = observacao;
+        }
 
         public override string Resumo()
         {

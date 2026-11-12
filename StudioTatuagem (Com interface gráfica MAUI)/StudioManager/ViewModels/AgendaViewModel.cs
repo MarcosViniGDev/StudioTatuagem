@@ -74,14 +74,14 @@ namespace StudioManager.ViewModels
             }
             bool confirmou = await Shell.Current.DisplayAlert(
                 "Cancelar sessão",
-                $"Cancelar a sessão de {agendamentoSelecionado.Cliente.Nome}?",
+                $"Cancelar a sessão de {AgendamentoSelecionado.Cliente?.Nome}?",
                 "Sim", "Não");
 
             if (!confirmou) return;
             else 
             {
                 _agenda.Cancelar(agendamentoSelecionado.Id);
-                mensagem = $"Sessão do cliente {agendamentoSelecionado.Cliente.Nome} cancelada com sucesso.";
+                mensagem = $"Sessão do cliente {AgendamentoSelecionado.Cliente?.Nome} cancelada com sucesso.";
                 
             }
             Carregar();

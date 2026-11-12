@@ -7,21 +7,34 @@
              x:DataType="vm:ClientesViewModel"
              Title="Clientes">
 
-    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="10">
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="20" RowSpacing="10">
 
         <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
             <Label Grid.Column="0" Text="Clientes" FontSize="24" VerticalOptions="Center" />
             <Button Grid.Column="1" Text="Novo cliente" Command="{Binding NovoClienteCommand}" />
         </Grid>
-        
-        <Grid Grid.Row="1" ColumnDefinitions="60,*,*,2*">
+
+        <HorizontalStackLayout Grid.Row="1" Spacing="10">
+            <Button Text="Editar selecionado" Command="{Binding EditarCommand}" />
+            <Button Text="Excluir selecionado" Command="{Binding ExcluirCommand}" />
+            <Label Text="{Binding Mensagem}" VerticalOptions="Center" />
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="2" ColumnDefinitions="60,*,*,2*">
             <Label Grid.Column="0" Text="Id" FontAttributes="Bold" />
             <Label Grid.Column="1" Text="Nome" FontAttributes="Bold" />
             <Label Grid.Column="2" Text="Telefone" FontAttributes="Bold" />
             <Label Grid.Column="3" Text="Observação" FontAttributes="Bold" />
         </Grid>
 
-        <CollectionView Grid.Row="2" ItemsSource="{Binding Clientes}">
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding Clientes}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding ClienteSelecionado}">
+            <CollectionView.EmptyView>
+                <Label Text="Nenhum cliente cadastrado." />
+            </CollectionView.EmptyView>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Cliente">
                     <Grid ColumnDefinitions="60,*,*,2*" Padding="0,5">
