@@ -5,13 +5,13 @@
              xmlns:models="clr-namespace:StudioManager.Models"
              x:Class="StudioManager.Views.AgendarSessaoPage"
              x:DataType="vm:AgendarSessaoViewModel"
-             Title="Nova sessão">
+             Title="Sessão">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="10"
                              MaximumWidthRequest="500" HorizontalOptions="Start">
 
-            <Label Text="Nova sessão" FontSize="24" />
+            <Label Text="{Binding Titulo}" FontSize="24" />
 
             <Label Text="Cliente" />
             <Picker Title="Selecione o cliente"
@@ -34,7 +34,7 @@
             <Label Text="Valor (R$)" />
             <Entry Text="{Binding Valor}" Placeholder="300,00" />
 
-            <Button Text="Agendar" Command="{Binding AgendarCommand}" />
+            <Button Text="{Binding TextoBotao}" Command="{Binding SalvarCommand}" />
 
             <Label Text="{Binding Mensagem}" />
 

@@ -121,5 +121,18 @@ namespace StudioManager.Services
             }
             return total;
         }
+
+        public bool DefinirImagem(int id, string? arquivo)
+        {
+            var agendamento = _repositorioAgendamento.BuscarPorId(id);
+            if (agendamento is null)
+            {
+                return false;
+            }
+
+            agendamento.ImagemArquivo = arquivo;
+            _repositorioAgendamento.Salvar();
+            return true;
+        }
     }
 }

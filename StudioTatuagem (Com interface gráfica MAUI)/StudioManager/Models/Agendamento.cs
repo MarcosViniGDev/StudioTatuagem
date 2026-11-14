@@ -15,6 +15,7 @@ namespace StudioManager.Models
         public int DuracaoMinutos { get; private set; }
         public string Descricao { get; private set; }
         public decimal Valor { get; private set; }
+        public string? ImagemArquivo { get; set; }
         public StatusAgendamento Status { get; set; } = StatusAgendamento.Agendado;
 
         [JsonIgnore]

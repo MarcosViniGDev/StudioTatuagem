@@ -44,6 +44,7 @@ namespace StudioManager
             builder.Services.AddTransient<AgendarSessaoPage>();
             builder.Services.AddSingleton<FaturamentoViewModel>();
             builder.Services.AddTransient<FaturamentoPage>();
+            builder.Services.AddSingleton<ArmazenamentoImagens>(_ => new ArmazenamentoImagens(Path.Combine(FileSystem.AppDataDirectory, "imagens")));
 
             return builder.Build();
         }

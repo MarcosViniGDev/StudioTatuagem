@@ -7,49 +7,84 @@
              x:DataType="vm:AgendaViewModel"
              Title="Agenda">
 
-    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="20" RowSpacing="10">
+    <Grid ColumnDefinitions="2*,*" ColumnSpacing="20" Padding="20">
 
-        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
-            <Label Grid.Column="0" Text="Agenda" FontSize="24" VerticalOptions="Center" />
-            <Button Grid.Column="1" Text="Nova sessão" Command="{Binding NovaSessaoCommand}" />
+        <!-- Coluna da esquerda: lista de sessões -->
+        <Grid Grid.Column="0" RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="10">
+
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                <Label Grid.Column="0" Text="Agenda" FontSize="24" VerticalOptions="Center" />
+                <Button Grid.Column="1" Text="Nova sessão" Command="{Binding NovaSessaoCommand}" />
+            </Grid>
+
+            <HorizontalStackLayout Grid.Row="1" Spacing="10">
+                <Button Text="Editar" Command="{Binding EditarCommand}" />
+                <Button Text="Concluir" Command="{Binding ConcluirCommand}" />
+                <Button Text="Cancelar" Command="{Binding CancelarCommand}" />
+            </HorizontalStackLayout>
+
+            <Label Grid.Row="2" Text="{Binding Mensagem}" />
+
+            <Grid Grid.Row="3" ColumnDefinitions="40,130,*,2*,90,90">
+                <Label Grid.Column="0" Text="Id" FontAttributes="Bold" />
+                <Label Grid.Column="1" Text="Início" FontAttributes="Bold" />
+                <Label Grid.Column="2" Text="Cliente" FontAttributes="Bold" />
+                <Label Grid.Column="3" Text="Descrição" FontAttributes="Bold" />
+                <Label Grid.Column="4" Text="Valor" FontAttributes="Bold" />
+                <Label Grid.Column="5" Text="Status" FontAttributes="Bold" />
+            </Grid>
+
+            <CollectionView Grid.Row="4"
+                            ItemsSource="{Binding Agendamentos}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding AgendamentoSelecionado}">
+                <CollectionView.EmptyView>
+                    <Label Text="Nenhum agendamento." />
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Agendamento">
+                        <Grid ColumnDefinitions="40,130,*,2*,90,90" Padding="0,5">
+                            <Label Grid.Column="0" Text="{Binding Id}" />
+                            <Label Grid.Column="1" Text="{Binding Inicio, StringFormat='{0:dd/MM/yyyy HH:mm}'}" />
+                            <Label Grid.Column="2" Text="{Binding Cliente.Nome}" />
+                            <Label Grid.Column="3" Text="{Binding Descricao}" />
+                            <Label Grid.Column="4" Text="{Binding Valor, StringFormat='{0:C}'}" />
+                            <Label Grid.Column="5" Text="{Binding Status}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </Grid>
 
-        <HorizontalStackLayout Grid.Row="1" Spacing="10">
-            <Button Text="Concluir selecionada" Command="{Binding ConcluirCommand}" />
-            <Button Text="Cancelar selecionada" Command="{Binding CancelarCommand}" />
-            <Label Text="{Binding Mensagem}" VerticalOptions="Center" />
-        </HorizontalStackLayout>
+        <!-- Coluna da direita: detalhes e imagem da sessão selecionada -->
+        <Border Grid.Column="1" Padding="15" Stroke="Gray" StrokeThickness="1">
+            <Grid RowDefinitions="Auto,*" RowSpacing="10">
 
-        <Grid Grid.Row="2" ColumnDefinitions="50,150,*,2*,100,100">
-            <Label Grid.Column="0" Text="Id" FontAttributes="Bold" />
-            <Label Grid.Column="1" Text="Início" FontAttributes="Bold" />
-            <Label Grid.Column="2" Text="Cliente" FontAttributes="Bold" />
-            <Label Grid.Column="3" Text="Descrição" FontAttributes="Bold" />
-            <Label Grid.Column="4" Text="Valor" FontAttributes="Bold" />
-            <Label Grid.Column="5" Text="Status" FontAttributes="Bold" />
-        </Grid>
+                <Label Grid.Row="0" Text="Detalhes da sessão" FontSize="18" FontAttributes="Bold" />
 
-        <CollectionView Grid.Row="3"
-                        ItemsSource="{Binding Agendamentos}"
-                        SelectionMode="Single"
-                        SelectedItem="{Binding AgendamentoSelecionado}">
-            <CollectionView.EmptyView>
-                <Label Text="Nenhum agendamento." />
-            </CollectionView.EmptyView>
+                <Label Grid.Row="1" Text="Selecione uma sessão na lista para ver os detalhes."
+                       IsVisible="{Binding SemSelecao}" />
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Agendamento">
-                    <Grid ColumnDefinitions="50,150,*,2*,100,100" Padding="0,5">
-                        <Label Grid.Column="0" Text="{Binding Id}" />
-                        <Label Grid.Column="1" Text="{Binding Inicio, StringFormat='{0:dd/MM/yyyy HH:mm}'}" />
-                        <Label Grid.Column="2" Text="{Binding Cliente.Nome}" />
-                        <Label Grid.Column="3" Text="{Binding Descricao}" />
-                        <Label Grid.Column="4" Text="{Binding Valor, StringFormat='{0:C}'}" />
-                        <Label Grid.Column="5" Text="{Binding Status}" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                <ScrollView Grid.Row="1" IsVisible="{Binding TemSelecao}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="{Binding AgendamentoSelecionado.Cliente.Nome}" FontAttributes="Bold" />
+                        <Label Text="{Binding AgendamentoSelecionado.Descricao}" />
+
+                        <Image Source="{Binding Imagem}" IsVisible="{Binding TemImagem}"
+                               HeightRequest="320" Aspect="AspectFit" />
+                        <Label Text="Nenhuma imagem anexada." IsVisible="{Binding SemImagem}" />
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Button Text="Anexar imagem" Command="{Binding AnexarImagemCommand}" />
+                            <Button Text="Remover imagem" Command="{Binding RemoverImagemCommand}" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+            </Grid>
+        </Border>
 
     </Grid>
 </ContentPage>
