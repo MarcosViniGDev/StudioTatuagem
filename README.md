@@ -14,12 +14,14 @@ Principais funcionalidades: As principais funcionalidades até o momento são :
 
 
  Futuras Atualizações: 
+ 
  1. Instalador do programa para nao precisar do visual studio
  3. Sistema de Estoque de materiais para melhor controle
  4. Banco de Dados
  5. Porte para Mobile
 
 Como executar
+
 Clone o repositório
 Abra a solução no Visual Studio (arquivo .sln dentro da pasta do projeto MAUI).
 Restaure os pacotes. O Visual Studio faz isso automaticamente ao abrir a solução. Se preferir, use Ferramentas → Gerenciador de Pacotes NuGet → Restaurar Pacotes.
@@ -30,6 +32,7 @@ Na primeira execução, o app abre com as listas vazias. Os arquivos de dados s�
 
 
 Como usar
+
 Em Clientes, clique em Novo cliente e preencha os dados.
 Em Agenda, clique em Nova sessão, escolha o cliente, a data, o horário, a duração, a descrição e o valor.
 Na lista da agenda, clique em uma sessão para ver os detalhes no painel à direita. Ali é possível anexar uma imagem de referência.
@@ -38,6 +41,7 @@ Em Faturamento, informe o ano e o mês para ver o total das sessões concluídas
 Em Backup, clique em Fazer backup agora para gerar uma cópia de segurança.
 
 Problemas comuns
+
 Problema --->	O que fazer
 O Visual Studio não encontra o destino Windows Machine ---> 	Instale a carga de trabalho do .NET MAUI pelo Visual Studio Installer
 
