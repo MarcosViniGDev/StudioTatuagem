@@ -3,6 +3,8 @@ Aluno: Marcos Vinicius da Silva Santos
 
 Nome do Projeto: SM Tattoo
 
+O projeto foi feito utilizando C# e o .NET MAUI, além disse foi utilizado a inteligência artificial Claude, sendo utilizada como um guia e um copiloto onde me ajudava com as ideias e alguns códigos que tive dificuldade por nunca ter visto
+
 Objetivo: O principal objetivo do SM é gerar um controle maior dos agendamentos e do faturamento de uma tatuadora
 
 Principais funcionalidades: As principais funcionalidades até o momento são :
@@ -43,6 +45,7 @@ Em Backup, clique em Fazer backup agora para gerar uma cópia de segurança.
 Problemas comuns
 
 Problema --->	O que fazer
+
 O Visual Studio não encontra o destino Windows Machine ---> 	Instale a carga de trabalho do .NET MAUI pelo Visual Studio Installer
 
 Erro pedindo o modo de desenvolvedor --->	Ative em Configurações do Windows → Sistema → Para desenvolvedores
